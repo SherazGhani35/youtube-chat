@@ -1,15 +1,35 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>YouTube Chat Test</title>
-  </head>
-  <body>
-    <h2>YouTube Live Chat Embed</h2>
-    <iframe 
-      width="400" 
-      height="600"
-      src="https://www.youtube.com/live_chat?v=zfw1qjW4HAg&embed_domain=SherazGhani35.github.io"
-      frameborder="0">
-    </iframe>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Live Chat Embed</title>
+</head>
+<body>
+  <h2>YouTube Live Chat</h2>
+  <div id="chat-container">
+    <p>Loading chat...</p>
+  </div>
+
+  <script>
+    function getVideoId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("videoId");
+    }
+
+    const videoId = getVideoId();
+    const embedDomain = "your-project.vercel.app"; // Replace later
+
+    if (videoId) {
+      const iframe = document.createElement("iframe");
+      iframe.width = "400";
+      iframe.height = "600";
+      iframe.frameBorder = "0";
+      iframe.src = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${embedDomain}`;
+      document.getElementById("chat-container").innerHTML = "";
+      document.getElementById("chat-container").appendChild(iframe);
+    } else {
+      document.getElementById("chat-container").innerHTML = "<p style='color:red;'>Missing videoId parameter.</p>";
+    }
+  </script>
+</body>
 </html>
